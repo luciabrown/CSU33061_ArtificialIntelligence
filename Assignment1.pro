@@ -3,15 +3,6 @@
 % +: Input Argument - must already be instantiated when predicate is called
 % ?: Input or Output Argument - can either be instantiated or uninstantiated, may return a value if uninstantiated
 
-q:- a.
-q:- b,c.
-a:- d,e.
-a:- c,e,f.
-b:- c.
-c:- e,f.
-e.
-f:- e.
-
 arc([H|T],Node,Cost,KB) :- 
     member([H|B],KB),   % Find a rule in the KB with head H and body B
     append(B,T,Node),   % Append B to the tail T to generate a new Node
