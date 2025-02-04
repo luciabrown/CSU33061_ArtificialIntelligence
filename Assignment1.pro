@@ -23,6 +23,7 @@ search([Node|More]) :-
     add2frontier(Children,More,New),
     search(New).
 
+% Less Than ensures that the best node is always at the head
 less-than([[Node1|_],Cost1],[[Node2|_],Cost2]) :-
     heuristic(Node1,Hvalue1), heuristic(Node2,Hvalue2),
     F1 is Cost1+Hvalue1, F2 is Cost2+Hvalue2,
