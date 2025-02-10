@@ -13,16 +13,35 @@ heuristic(Node,H) :- length(Node,H).    % Heuristic of a node is the length of t
 
 goal([]).   % Goal state is reached when there are no more subgoals left
 
-astar(Node,Path,Cost,KB)
+astar(Node, Path, Cost, KB) :-
+    heuristic(Node, H),
+    search([[Node, [], 0, H]], KB, Path, Cost).
 
-% Sample skeleton 
-search([Node|_]) :- goal(Node).
+% A* search that maintains a sorted frontier
+search([[Node, RevPath, Cost, _]|_], _, Path, Cost) :-
+    goal(Node),
+    reverse([[]|RevPath], Path).
 
-search([Node|More]) :- 
-    findall(X,arc(Node,X),Children),
-    add2frontier(Children,More,New),
-    search(New).
+search([[Node, RevPath, Cost, _]|Rest], KB, Path, FinalCost) :-
+    findall([Child, [Node|RevPath], NewCost, F], 
+            (arc(Node, Child, StepCost, KB),
+             \+ member(Child, RevPath),  % Avoid cycles
+             NewCost is Cost + StepCost,
+             heuristic(Child, H),
+             F is NewCost + H),
+            Children),
+    add2frontier(Children, Rest, NewFrontier),
+    search(NewFrontier, KB, Path, FinalCost).
 
+% Ensures frontier is sorted based on f-value
+add2frontier(Children, Frontier, NewFrontier) :-
+    append(Children, Frontier, Combined),
+    predsort(compare_nodes, Combined, NewFrontier).
+
+compare_nodes(Order, [_, _, Cost1, F1], [_, _, Cost2, F2]) :-
+    F1 =:= F2 -> (Cost1 =< Cost2 -> Order = (<) ; Order = (>));
+    (F1 < F2 -> Order = (<) ; Order = (>)).
+    
 % Less Than ensures that the best node is always at the head
 less-than([[Node1|_],Cost1],[[Node2|_],Cost2]) :-
     heuristic(Node1,Hvalue1), heuristic(Node2,Hvalue2),
