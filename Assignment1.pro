@@ -41,9 +41,3 @@ add2frontier(Children, Frontier, NewFrontier) :-
 compare_nodes(Order, [_, _, Cost1, F1], [_, _, Cost2, F2]) :-
     F1 =:= F2 -> (Cost1 =< Cost2 -> Order = (<) ; Order = (>));
     (F1 < F2 -> Order = (<) ; Order = (>)).
-    
-% Less Than ensures that the best node is always at the head
-less-than([[Node1|_],Cost1],[[Node2|_],Cost2]) :-
-    heuristic(Node1,Hvalue1), heuristic(Node2,Hvalue2),
-    F1 is Cost1+Hvalue1, F2 is Cost2+Hvalue2,
-    F1 =< F2.
