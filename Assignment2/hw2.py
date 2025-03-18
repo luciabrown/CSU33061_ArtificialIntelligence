@@ -33,7 +33,8 @@ All other states:       path      [reward = 0].
 
 """
 # import libs
-import time, sys
+import time
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -217,8 +218,21 @@ class QLearningTable:
         else:
 
             # Q7.2 Put your answer here; please take care about the indent
-            action = self.q_table.loc[observation, :]
+            state_action = self.q_table.loc[observation, :]
+            action = np.random.choice(state_action[state_action == np.min(state_action)].index)
         return action
+#===================================================
+        """        
+            # Choose your answer for Q7 from below (to complete the code).
+        B):
+            state_action = self.q_table.loc[observation, :]
+            action = np.random.choice(state_action[state_action == np.max(state_action)].index)
+
+        C):
+            state_action = self.q_table.loc[observation, :]
+            action = np.random.choice(state_action[state_action == np.min(state_action)].index)
+            """
+#====================================================================================================
 
     def learn(self, s, a, r, s_):
         self.check_state_exist(s_)
