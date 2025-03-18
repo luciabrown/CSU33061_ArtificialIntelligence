@@ -212,19 +212,13 @@ class QLearningTable:
 
             # Q7.1 put your answer here; please take care about the indent
             state_action = self.q_table.loc[observation, :]
+            action = np.random.choice(state_action[state_action == np.max(state_action)].index)
+
         else:
 
             # Q7.2 Put your answer here; please take care about the indent
-            action = np.random.choice(state_action[state_action == np.max(state_action)].index)
-
+            action = self.q_table.loc[observation, :]
         return action
-#===================================================
-        """        
-        B):
-            state_action = self.q_table.loc[observation, :]
-            action = np.random.choice(state_action[state_action == np.max(state_action)].index)
-            """
-#====================================================================================================
 
     def learn(self, s, a, r, s_):
         self.check_state_exist(s_)
@@ -258,12 +252,8 @@ class QLearningTable:
             new_state_name = 'S' + str(self.new_state_index)
             print('Add a new state', new_state_name,' into the Q table')
             self.new_state_index += 1
-            self.q_table = self.q_table.append(
-                pd.Series(
-                    [0]*len(self.actions),
-                    index=self.q_table.columns,
-                    name= state,
-                )
+            self.q_table = pd.concat(
+                [self.q_table, pd.DataFrame([[0] * len(self.actions)], index=[state], columns=self.actions)]
             )
 
 
