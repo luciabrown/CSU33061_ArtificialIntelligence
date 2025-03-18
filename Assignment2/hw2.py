@@ -33,8 +33,7 @@ All other states:       path      [reward = 0].
 
 """
 # import libs
-import time
-import sys
+import time, sys
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -212,31 +211,18 @@ class QLearningTable:
         if np.random.uniform() < (1- self.epsilon):
 
             # Q7.1 put your answer here; please take care about the indent
-
+            state_action = self.q_table.loc[observation, :]
         else:
 
             # Q7.2 Put your answer here; please take care about the indent
+            action = np.random.choice(state_action[state_action == np.max(state_action)].index)
 
         return action
 #===================================================
         """        
-            # Choose your answer for Q7 from below (to complete the code).
-        A):
-            action = self.q_table.loc[observation, :]
-
         B):
             state_action = self.q_table.loc[observation, :]
             action = np.random.choice(state_action[state_action == np.max(state_action)].index)
-
-        C):
-            state_action = self.q_table.loc[observation, :]
-            action = np.random.choice(state_action[state_action == np.min(state_action)].index)
-
-        D):
-            action = self.q_table.loc[observation, 2]
-
-        E):
-            action = np.random.choice(self.actions)
             """
 #====================================================================================================
 

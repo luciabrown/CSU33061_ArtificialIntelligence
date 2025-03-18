@@ -1,0 +1,12 @@
+Q1 = B [’u’, ’d’, ’l’, ’r’]
+Q2 = C 25
+Q3 = D The difference between the updated future rewards and the old estimate
+Q4 = D The prediction of the expected future rewards is better
+Q5 =
+Q6 =
+Q7 = B state action = self.q table.loc[observation, :]  action = np.random.choice(state action[state action == np.max(state action)].index)
+Q8 =
+Q9 =
+Q10 =
+Q11 =
+Q12 =   
