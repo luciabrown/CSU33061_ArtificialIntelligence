@@ -8,4 +8,4 @@ Q8 = B TD(s,a) = r + γmaxa′ Q(s′, a′) − Q(s, a)
 Q9 = C not always the same, unless the training episodes are many enough
 Q10 = D has a decreasing trend with oscillation
 Q11 = B more training episodes
-Q12 =   
+Q12 = A The peak of the curve is when the Q-learner is exploiting.
