@@ -1,0 +1,2 @@
+% An implementation of the add2frontier/3 predicate which expands the frontier by appending the Children to the front of the frontier
+% This is a LIFO implementation which implements Frontier Search as DFS
